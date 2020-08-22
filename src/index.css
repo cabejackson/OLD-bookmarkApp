@@ -1,0 +1,12 @@
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: #a41e35;
+     /* text-align: center; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5em;
+    color: black;
+}
+body{
+    background-color: antiquewhite;
+}

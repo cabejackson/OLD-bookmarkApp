@@ -21,19 +21,19 @@ const STORE = [
  let filter = false;
  
 //HMMMMMMM
-// function to toggle adding mode
-function toggleAdding(){
-   if (adding === false){
-     adding = true;
-   } else {
-     adding = false;
-   }
- }
- //HMMMMMM
- // Function to toggle exanded
-function toggleExpand(val){
-   STORE.expanded = val;
- }
+// function to toggle
+// function toggleAdding(){
+//    if (adding === false){
+//      adding = true;
+//    } else {
+//      adding = false;
+//    }
+//  }
+
+// Function to toggle exanded
+// function toggleExpand(val){
+//    STORE.expanded = val;
+//  }
 
  function handleAddShow() {
     //console.log('THIS IS ADDING', adding);
@@ -57,14 +57,14 @@ function toggleExpand(val){
     this.STORE = this.bookmarks.filter(currentBookmark => currentBookmark.id !== id);
  };
   
- const toggleExpandBookmark = function () {
-    this.bookmarks.expanded = !this.bookmarks.expanded;
+ const toggleExpandBookmark = function (id) {
+    console.log('newwwwwww toggle');
+   const bookmark = this.findById(id);
+   console.log('tHIS IS THE BOOKMARK ->', bookmark);
+   bookmark.expanded = !bookmark.expanded;
  };
   
-//  const toggleAdding = function () {
-//     this.adding = !this.adding;
-//  };
-  
+
  const findAndUpdate = function (id, newData) {
     const currentBookmark = this.findById(id);
     Object.assign(currentBookmark, newData);
@@ -84,8 +84,8 @@ function toggleExpand(val){
     addBookmark,
     findAndDelete,
     toggleExpandBookmark,
-    toggleAdding,
-    toggleExpand,
+    //toggleAdding,
+    //toggleExpand,
     findAndUpdate,
     setError,
     handleAddShow,

@@ -4,7 +4,6 @@ import store from './store';
  
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/caleb';
  
-//AHHHHHHH -html -MAYYYYBE
 const listApiFetch = function (...args) {
  let error;
  return fetch(...args)
@@ -32,7 +31,7 @@ const getBookmarks = function () {
 };
  
 const createBookmark = function (title, url, rating, description) {
-   console.log("CREATE BUTTON GOES OFF")
+   console.log('CREATE BUTTON GOES OFF');
  const newBookmark = JSON.stringify({
      'title':title,
      'url': url,

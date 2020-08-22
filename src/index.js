@@ -10,7 +10,6 @@ const main = function () {
  console.log('MAIN -THISSSS WORKS!');
  api.getBookmarks()
  .then((bookmarksArr) => {
-   //bookmarks might give me trouble here
    bookmarksArr.forEach((bookmark) => store.addBookmark(bookmark));
    bookmarks.renderPage();
  });
