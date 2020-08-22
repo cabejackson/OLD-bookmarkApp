@@ -14,20 +14,35 @@ const STORE = [
     }
  ];
  //different states (global var)
+ //move these to store?
  let adding = false;
  let error = null;
  let filterVal = 0;
  let filter = false;
  
-  
+//HMMMMMMM
+// function to toggle adding mode
+function toggleAdding(){
+   if (adding === false){
+     adding = true;
+   } else {
+     adding = false;
+   }
+ }
+ //HMMMMMM
+ // Function to toggle exanded
+function toggleExpand(val){
+   STORE.expanded = val;
+ }
+
  function handleAddShow() {
     //console.log('THIS IS ADDING', adding);
     this.adding = true;
  }
- // function handleAddHide() {
- //     //console.log('THIS IS ADDING', adding);
- //     this.adding = false;
- // }
+ function handleAddHide() {
+     //console.log('THIS IS ADDING', adding);
+     this.adding = false;
+ }
   
   
  const findById = function (id) {
@@ -46,9 +61,9 @@ const STORE = [
     this.bookmarks.expanded = !this.bookmarks.expanded;
  };
   
- const toggleAdding = function () {
-    this.adding = !this.adding;
- };
+//  const toggleAdding = function () {
+//     this.adding = !this.adding;
+//  };
   
  const findAndUpdate = function (id, newData) {
     const currentBookmark = this.findById(id);
@@ -70,8 +85,10 @@ const STORE = [
     findAndDelete,
     toggleExpandBookmark,
     toggleAdding,
+    toggleExpand,
     findAndUpdate,
     setError,
     handleAddShow,
+    handleAddHide,
  };
  

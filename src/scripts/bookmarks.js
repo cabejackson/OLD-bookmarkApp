@@ -110,15 +110,14 @@ function generateForm() {
      </fieldset>
      <button id= "create" type= "submit">CREATE</button>
  </div>
-  <form id="cancel-addBookmark">
- <button id="buttonCancel" aria-label="click to cancel bookmark creation">CANCEL</button>
- </form>
+
  </div>
   </div>`;
  
 };
 
 const  generateFilter = function() {
+    console.log('hi!!!!!!');
     if (store.filter) {
         let filterArr = [];
         for (let i = 1; i < 6; i++) {
@@ -161,15 +160,22 @@ const generateBookmarkString = function (bookmarkList) {
    const bookmarks = bookmarkList.map((bookmark) => generateBookElement(bookmark));
    return bookmarks.join('');
 };
- 
- 
+
 //opens new bookmark form
 const handleOpenAddForm = function () {
-   $('#addNew').click(function () {
+   $('.addNew').click(function () {
        store.handleAddShow();
        renderPage();
    });
 };
+
+// Function to close out the add bookmark form
+function handleBookmarkCancel(){
+    $('#buttonCancel').click(function () {
+        store.handleAddHide();
+        renderPage();
+    });
+}
  
  
 //opens new the visit site in a new tab once clicked
@@ -189,6 +195,7 @@ const handleDismissError = function () {
 
 
 const filterButton = function() {
+    console.log('okayyyyyy');
     $('.header').on('click', '#filter-start', () => {
         store.states.filter = !store.states.filter;
         renderPage();
@@ -196,6 +203,7 @@ const filterButton = function() {
 };
 
 const filterSelection = function() {
+    console.log('filter selection is workin workin');
     $('main').on('change', '#filter', () => {
         store.states.filterVal = $('option:selected').val();
         renderPage();
@@ -203,19 +211,7 @@ const filterSelection = function() {
 };
  
  
-//VERY CoNFUSED
-//should returns user back to initialPage
-const handleBookmarkCancel = function () {
-   // $('#cancel-addBookmark').click(function (){
-   // add event.preventDefault to this
-   //     store.handleAddHide();
-   //     let cancel = generateForm();
-   //     console.log('heyyyyyyy', cancel);
-   //     $('form').html(cancel);
-   //     renderPage();
- 
-   //   });
-};
+
  
 //says POST Bad request - hmmm idk ask later
 //listens for form submit
@@ -286,12 +282,10 @@ const renderError = function () {
 };
  
  
-//conditional statement needed for error vs rederPage?
 const renderPage = function () {
-   console.log('RENDER PAGE!', store.adding);
+   //console.log('RENDER PAGE!', store.adding);
    renderError();
    let bookmarks = [...store.STORE];
-   //let html = generateHtml(); -- maybe not needed
    const bookmarkListString = generateBookmarkString(bookmarks);
    $('.bookmarkList').html(bookmarkListString);
  
