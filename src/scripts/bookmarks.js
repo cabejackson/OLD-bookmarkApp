@@ -76,18 +76,18 @@ const generateBookElement = function (STORE) {
 // generateForm is the form page with a place to input: Title, URL, rating and description
 // Here's what I still need to do:
    //fix unecessary divs & I can't click cancel w/o it requiring radio button selection
-const generateForm = function() {
+function generateForm() {
    //form includes labels - a11y requirements
    //and the "for" attr matches the "id" - a11y requirements
    return `
  <form id="add-bookmark">
      <div class="form-group">
          <label for="bookName">Add Bookmark Title</label>
-         <input type="text" class="form-control" id="bookName" placeholder="write title here">
+         <input type="text" class="form-control" id="bookName" placeholder="write title here" required>
      </div>
      <div class="form-group">
          <label for="siteURL">Add Site URL</label>
-         <input type="text" class="form-control" id="siteURL" placeholder="http://samplelink.com">
+         <input type="text" class="form-control" id="siteURL" placeholder="http://samplelink.com" required>
      </div>
      <div class="form-group">
          <label for="addDescr">Add Description</label>
@@ -98,15 +98,15 @@ const generateForm = function() {
      <fieldset>
          <legend aria-label="star ratings" >⭐️Ratings</legend>
          <label aria-label="select 5 star rating" for="5">5</label>
-         <input type="radio" id="5" value= "5" name="radioRating" required>
+         <input type="radio" id="5" value= "5" name="radioRating">
          <label aria-label="select 4 star rating" for="4">4</label>
-         <input type="radio" id="4" value= "4" name="radioRating"required>
+         <input type="radio" id="4" value= "4" name="radioRating">
          <label aria-label="select 3 star rating" for="3">3</label>
-         <input type="radio" id="3" value= "3" name="radioRating"required>
+         <input type="radio" id="3" value= "3" name="radioRating">
          <label aria-label="select 2 star rating" for="2">2</label>
-         <input type="radio" id="2" value= "2" name="radioRating"required>
+         <input type="radio" id="2" value= "2" name="radioRating">
          <label aria-label="select 1 star rating" for="1">1</label>
-         <input type="radio" id="1" value= "1" name="radioRating"required>
+         <input type="radio" id="1" value= "1" name="radioRating">
      </fieldset>
      <button id= "create" type= "submit">CREATE</button>
  </div>
@@ -117,6 +117,30 @@ const generateForm = function() {
   </div>`;
  
 };
+
+const  generateFilter = function() {
+    if (store.filter) {
+        let filterArr = [];
+        for (let i = 1; i < 6; i++) {
+            if (i === store.filterVal) {
+                filterArr.push(`<option class='filter-option' value="${i}" selected>${i}</option>`);
+            } else {
+                filterArr.push(`<option class='filter-option' value="${i}">${i}</option>`);
+            }
+        }
+        let optionStr = filterArr.join('');
+
+        return `<div class="bookmark-filter">
+    <label for="filter">Filter Bookmarks: Minimum Rating</label>
+    <select name="filter" id="filter" value="">
+        ${optionStr}
+       </select>
+      </div>`;
+    }
+};
+
+
+
 // Here's what I still need to do:
    // Understand how this generateError message works!!
    //Questions:
@@ -162,7 +186,21 @@ const handleDismissError = function () {
        renderError();
    });
 };
- 
+
+
+const filterButton = function() {
+    $('.header').on('click', '#filter-start', () => {
+        store.states.filter = !store.states.filter;
+        renderPage();
+    });
+};
+
+const filterSelection = function() {
+    $('main').on('change', '#filter', () => {
+        store.states.filterVal = $('option:selected').val();
+        renderPage();
+    });
+};
  
  
 //VERY CoNFUSED
@@ -277,11 +315,14 @@ function bindEventListeners() {
    handleBookmarkCancel();
    handleDismissError();
    handleVisitSite();
+   filterButton();
+   filterSelection();
 }
 
 export default {
     generateBookElement,
     generateForm,
+    generateFilter,
     getIdFromElement,
     renderPage,
     renderError,

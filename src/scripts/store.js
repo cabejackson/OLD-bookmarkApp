@@ -13,9 +13,12 @@ const STORE = [
         expanded: false
     }
  ];
+ //different states (global var)
  let adding = false;
  let error = null;
- let filter = 0;
+ let filterVal = 0;
+ let filter = false;
+ 
   
  function handleAddShow() {
     //console.log('THIS IS ADDING', adding);
@@ -61,6 +64,7 @@ const STORE = [
     adding,
     error,
     filter,
+    filterVal,
     findById,
     addBookmark,
     findAndDelete,
