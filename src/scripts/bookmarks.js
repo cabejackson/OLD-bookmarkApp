@@ -34,6 +34,7 @@ const generateBookElement = function (STORE) {
         // each bookmark has it's own unique id
         // aria-label added for edit & delete button - a11y requirements
         return `
+        <div class="js-bookmark">
        <li class="bookmark" data-bookmark-id="${STORE.id}">
            <div class="bookmark-title">${STORE.title}</div><div class="bookmark-rating">${STORE.rating}${STORE.stars}</div>
            <div class="expanded">
@@ -44,17 +45,21 @@ const generateBookElement = function (STORE) {
            <p class="bookmark-description">${STORE.desc}</p>
            <a href="${STORE.url}"><button class="visit site">Visit Site</button></a>
            </div>
-       </li>`;
+       </li>
+       </div>`;
     } else {
         //if the STORE.expanded property is set to false,
         //then only the title and rating will be shown in the DOM
         // THIS fufills the "All bookmarks in the list default to a
         // "condensed" view showing only title and rating" requirement
         return `
-       <li class="bookmark-1" data-bookmark-id="${STORE.id}">
+       <li class="bookmark" data-bookmark-id="${STORE.id}">
+        <div class="js-hideandshow">
            <div class="bookmark-title">${STORE.title}</div><div class="bookmark-rating"> ${STORE.rating}</div>
-           <div class="expanded hidden">
-           </div>
+           <div class="expanded hidden"></div>
+           <button id="show" aria-label="click to expand">Show Info</button>
+           <button id="hide" aria-label="click to hide">Hide Info</button>
+        </div>
        </li>`;
     }
 };
@@ -62,7 +67,7 @@ const generateBookElement = function (STORE) {
 
 // generateForm is the form page with a place to input: Title, URL, rating and description
 // Here's what I still need to do:
-    //remove unecessary divs 
+//remove unecessary divs 
 function generateForm() {
     //form includes labels - a11y requirements
     //and the "for" attr matches the "id" - a11y requirements
@@ -70,15 +75,15 @@ function generateForm() {
  <form id="add-bookmark">
      <div class="form-group">
          <label for="bookName">Add Bookmark Title</label>
-         <input type="text" class="form-control" id="bookName" placeholder="write title here" required>
+         <input type="text" class="form-control" id="bookName" placeholder="write title here" required/>
      </div>
      <div class="form-group">
          <label for="siteURL">Add Site URL</label>
-         <input type="text" class="form-control" id="siteURL" placeholder="http://samplelink.com" required>
+         <input type="text" class="form-control" id="siteURL" placeholder="http://samplelink.com" required/>
      </div>
      <div class="form-group">
          <label for="addDescr">Add Description</label>
-         <input type="text" class="form-control" id="addDescr" placeholder="write description here">
+         <input type="text" class="form-control" id="addDescr" placeholder="write description here"/>
      </div>
      <div id="star-rating">
       <div class="add-book-rating-radio-button" aria-label="please select rating for new bookmark">
@@ -95,6 +100,7 @@ function generateForm() {
          <label aria-label="select 1 star rating" for="1">1</label>
          <input type="radio" id="1" value= "1" name="radioRating">
      </fieldset>
+     <ul class='current-bookmarks'>
      <button id= "create" type= "submit">CREATE</button>
  </div>
 
@@ -173,12 +179,12 @@ const handleVisitSite = function () {
 };
 
 //listens for when the x on the error is clicked
-const handleDismissError = function () {
-    $('').on('click', '#cancelError', () => {
-        store.setError(null);
-        renderError();
-    });
-};
+// const handleDismissError = function () {
+//     $('').on('click', '#cancelError', () => {
+//         store.setError(null);
+//         renderError();
+//     });
+// };
 
 
 const filterButton = function () {
@@ -231,15 +237,45 @@ const getIdFromElement = function (bookmark) {
 };
 
 //toggles bookmarks open upon click of title (ask mentor - v confused as to why id is undefined)
-function handleTogglingBookmark() {
-    console.log('TOGGLE in BOOKMARK.JS is runninggggggg');
-    $('.bookmarkList').click('.bookmark', function () {
-        const id = $(this).closest('.bookmark').data('id');
-        console.log('TEST', id);
-        store.toggleExpandBookmark(id);
-        renderPage();
+// function handleTogglingBookmark() {
+//     console.log('TOGGLE in BOOKMARK.JS is runninggggggg');
+    
+//     //const id = $(this).data('id');
+//     $("#hide").click(function(){
+//         console.log('TOGGLE in BOOKMARK.JS is runninggggggg');
+//         $(".js-hideandshow").hide();
+//       });
+//       $("#show").on('click', function(){
+//         console.log('TOGGLE in BOOKMARK.JS is something');
+//         $(".js-hideandshow").show();
+//       });
+//       renderPage();
+
+//     // $('.bookmarkList').click('.bookmark', function () {
+//     //     const id = $(this).data('id');
+//     //     console.log('TEST', id);
+//     //     store.toggleExpandBookmark(id);
+//     //     renderPage();
+//     // });
+// }
+
+const expandBookMark = function () {
+    $('.bookmarkList').on('click', '.bookmark', function (event) {
+      event.preventDefault();
+      let foundID = $(event.currentTarget).data();
+      let foundBookmark = store.findById(foundID.bookmarkId);
+      if (foundBookmark.editing === true) {
+        return;
+      } else if (foundBookmark.expanded === false) {
+        foundBookmark.expanded = true;
+        render();
+        foundBookmark.expanded = false;
+      } else {
+        foundBookmark.expanded = false;
+        render();
+      }
     });
-}
+  };
 
 
 //This function deletes bookmark in store/api then updates the DOM
@@ -301,7 +337,8 @@ function bindEventListeners() {
     handleVisitSite();
     filterButton();
     filterSelection();
-    handleTogglingBookmark();
+    //handleTogglingBookmark();
+    expandBookMark();
 }
 
 export default {
