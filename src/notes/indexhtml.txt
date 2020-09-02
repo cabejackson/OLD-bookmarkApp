@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Quiz App</title>
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"
+   type="text/css" />
+</head>
+ 
+<body>
+ <header class="test">
+   <h1>My Bookmarks</h1>
+ </header>
+ 
+ <main >
+  <div >
+    <!-- Add New Bookmark Button -->
+    <fieldset>
+    <legend required>Filter By</legend>
+    <label for="rating-filter">
+      <select id="selected" aria-label="select a rating" aria-activedescendant="rating-filter">
+        <option aria-label="select 5 star rating" role="option" value="5" id="rating-filter-5">5 ⭐️</option>
+        <option aria-label="select 4 star rating" role="option" value="4" id="rating-filter-4">4 ⭐️</option>
+        <option aria-label="select 3 star rating" role="option" value="3" id="rating-filter-3">3 ⭐️</option>
+        <option aria-label="select 2 star rating" role="option" value="2" id="rating-filter-2">2 ⭐️</option>
+        <option aria-label="select 1 star rating" role="option" value="1" id="rating-filter-1">1 ⭐️</option>
+      </select>
+      </label>
+     </fieldset>
+     <button type='button' class='addNew'>ADD NEW</button>
+      <button id="buttonCancel" aria-label="click to cancel bookmark creation">CANCEL ADD</button>
+ </div>
+ <div id="formContent"></div>
+
+   <ul class="js-main-bookmark-list"></ul>
+ 
+   
+  
+ 
+   <ul class="bookmarkList">
+   </ul>
+ 
+ 
+ </main>
+</body>
+</html>
+
+
+
+
+--------------
+
+ <div >
+    <!-- Add New Bookmark Button -->
+    <fieldset>
+    <legend required>Filter By</legend>
+    <label for="rating-filter">
+      <select id="selected" aria-label="select a rating" aria-activedescendant="rating-filter">
+        <option aria-label="select 5 star rating" role="option" value="5" id="rating-filter-5">5 ⭐️</option>
+        <option aria-label="select 4 star rating" role="option" value="4" id="rating-filter-4">4 ⭐️</option>
+        <option aria-label="select 3 star rating" role="option" value="3" id="rating-filter-3">3 ⭐️</option>
+        <option aria-label="select 2 star rating" role="option" value="2" id="rating-filter-2">2 ⭐️</option>
+        <option aria-label="select 1 star rating" role="option" value="1" id="rating-filter-1">1 ⭐️</option>
+      </select>
+      </label>
+     </fieldset>
+     <button type='button' class='addNew'>ADD NEW</button>
+      <button id="buttonCancel" aria-label="click to cancel bookmark creation">CANCEL ADD</button>
+ </div>
+ <div id="formContent"></div>
+
+   <ul class="js-main-bookmark-list"></ul>
+ 
+   
+  
+ 
+   <ul class="bookmarkList">
+   </ul>
+
+
+
+   -------
+      <h1>My Bookmarks</h1>
+ 
+ 

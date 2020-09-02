@@ -30,15 +30,15 @@ const getBookmarks = function () {
  return listApiFetch(`${BASE_URL}/bookmarks`);
 };
  
-const createBookmark = function (title, url, rating, description) {
-   console.log('CREATE BUTTON GOES OFF');
- const newBookmark = JSON.stringify({
-     'title':title,
-     'url': url,
-     'rating': rating,
-     'desc': description
-   });
-   console.log(newBookmark);
+const createBookmark = function (newBookmark) {
+   //console.log('CREATE BUTTON GOES OFF');
+//  const newBookmark = JSON.stringify({
+//      'title':title,
+//      'url': url,
+//      'rating': rating,
+//      'desc': description
+//    });
+   //console.log(newBookmark);
  return listApiFetch(`${BASE_URL}/bookmarks`, {
    method: 'POST',
    headers: {

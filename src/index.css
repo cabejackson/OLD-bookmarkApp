@@ -1,12 +1,331 @@
-header {
-    display: flex;
-    flex-direction: column;
-    background-color: #a41e35;
-     /* text-align: center; */
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.5em;
-    color: black;
+ /*------- general stylings --------*/
+ * {
+     box-sizing: border-box;
+     font-family: 'Markazi Text', serif;
+
+ }
+
+ body {
+     margin: 0 auto;
+     padding: 0 10px;
+     width: 100%;
+     background-image: url("./pixles.jpg");
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
+     background-attachment: fixed;
+ }
+
+ main {
+     margin: 0 auto;
+ }
+
+ h1 {
+     font-size: 3.5rem;
+     font-variant: small-caps;
+     text-align: center;
+     text-decoration: underline;
+     margin: 0 auto .33em;
+ }
+
+ h2,
+ h3 {
+     font-size: 1.6rem;
+     font-variant: small-caps;
+     margin: 0;
+ }
+
+ .bookmark-list {
+     list-style: none;
+     padding-left: 0;
+ }
+
+ .bookmark-list>li {
+     border: 1px solid #C4C4C4;
+     margin-bottom: 20px;
+     display: flex;
+     flex-direction: column;
+ }
+
+ .bookmark-name {
+     background-color: #C4C4C4;
+     margin: 0;
+     padding: 0;
+ }
+
+ label {
+    font-size: 1.8rem;
+    font-variant: all-petit-caps;
+  }
+
+  /* legend {
+    font-size: 1.8rem;
+    font-variant: small-caps;
+  } */
+
+ /*------ flex styling -------*/
+ .left-side {
+     flex: 1;
+ }
+
+ .right-side {
+     flex: 2;
+     text-align: end;
+ }
+
+ .flex-link {
+     flex: 1;
+     margin: auto;
+ }
+
+ .flex-desc {
+     flex: 3;
+     cursor: pointer;
+     font-size: large;
+     padding: 5px;
+ }
+
+
+ /* ------------- List & Button Stylings ----------------- */
+ .flex-button {
+     padding: 10px 16px;
+     border-radius: 50px;
+     border: solid whitesmoke;
+     background-color: #0C6291;
+     color: whitesmoke;
+     font-family: 'Markazi Text', serif;
+     font-size: 20px;
+     margin: auto;
+ }
+
+ .flex-button:hover {
+     background-color: #81B8D9
+ }
+
+ .top-half {
+     background-color: #3E885B;
+     flex: 1;
+     padding: 1rem;
+ }
+
+ .bottom-half {
+     background-color: #080705;
+     flex: 1;
+     padding: 1rem;
+ }
+
+ .even-flex {
+     display: flex;
+     justify-content: space-evenly;
+ }
+
+ .flex-between,
+ .flex-details {
+     display: flex;
+     justify-content: space-between;
+     flex-direction: row;
+ }
+
+ .flex-details {
+     margin: 20px 0 0 20px;
+ }
+
+ .flex-direction {
+     flex-direction: column;
+ }
+
+ /*------ input stylings -------*/
+ input {
+     border: none;
+ }
+
+ button,
+ input[type="text"],
+ select.js-filter-rating {
+     padding: 5px;
+     font-size: 1.5rem;
+     font-variant: small-caps;
+ }
+
+ .shadow {
+     box-shadow: 5px 5px 5px #c4c4c4;
+ }
+
+ button.js-add-bookmark,
+ select.js-filter-rating {
+     min-width: 45%;
+ }
+
+ button:hover {
+     cursor: pointer;
+ }
+
+ button:active {
+     transform: translateY(4px);
+     box-shadow: 2px 2px 5px #c4c4c4;
+ }
+
+ .textarea-newadd {
+     width: 100%;
+ }
+
+ .js-bookmark-url-entry,
+ .js-bookmark-title-entry {
+     width: 100%;
+ }
+
+ .expand-buttons {
+     /* margin-left: 50px; */
+     min-width: 75px;
+     padding: 10px 16px;
+     border-radius: 50px;
+     border: solid whitesmoke;
+     background-color: #0C6291;
+     color: whitesmoke;
+     font-family: 'Markazi Text', serif;
+     font-size: 20px;
+     margin: auto;
+ }
+
+ .expand-buttons:hover {
+     background-color: #81B8D9
+ }
+
+ .padding {
+     padding: 25px;
+ }
+
+ /* .add-button {
+     max-width: 50%;
+     text-align: center;
+     margin-top: 10px;
+ } */
+ .add-button {
+    /* margin-left: 50px; */
+    max-width: 50%;
+    text-align: center;
+    min-width: 75px;
+    padding: 10px 16px;
+    border-radius: 50px;
+    border: solid whitesmoke;
+    background-color: #0C6291;
+    color: whitesmoke;
+    font-family: 'Markazi Text', serif;
+    font-size: 20px;
+    margin: auto;
 }
-body{
-    background-color: antiquewhite;
+.add-button:hover {
+    background-color: #81B8D9
 }
+
+ fieldset {
+     max-width: 100%;
+ }
+
+ /*------- heart rating stylings --------*/
+ .rating {
+     display: inline-block;
+     position: relative;
+     height: 20px;
+     line-height: 20px;
+     font-size: 30px;
+ }
+
+ .rating label {
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 100%;
+     cursor: pointer;
+ }
+
+ .rating label:last-child {
+     position: static;
+ }
+
+ .rating label:nth-child(1) {
+     z-index: 5;
+ }
+
+ .rating label:nth-child(2) {
+     z-index: 4;
+ }
+
+ .rating label:nth-child(3) {
+     z-index: 3;
+ }
+
+ .rating label:nth-child(4) {
+     z-index: 2;
+ }
+
+ .rating label:nth-child(5) {
+     z-index: 1;
+ }
+
+ .rating label input {
+     position: absolute;
+     top: 0;
+     left: 0;
+     opacity: 0;
+ }
+
+ .rating label .icon {
+     float: left;
+     color: transparent;
+     padding-top: 10px;
+ }
+
+ .rating label:last-child .icon {
+     color: #c4c4c4;
+ }
+
+ .rating:not(:hover) label input:checked~.icon,
+ .rating:hover label:hover input~.icon {
+     color: #bb432c;
+ }
+
+ .rating label input:focus:not(:checked)~.icon:last-child {
+     color: #c4c4c4;
+ }
+
+ .background-hearts {
+     color: #c4c4c4;
+     position: absolute;
+     z-index: 1;
+ }
+
+ .colored-hearts {
+     color: #bb432c;
+     position: absolute;
+     z-index: 2;
+ }
+
+ .heart-size {
+     font-size: 90px;
+     margin-top: 10px
+ }
+
+ @media all and (min-width: 800px) {
+     body {
+         max-width: 800px;
+     }
+
+     button.js-add-bookmark,
+     select.js-filter-rating {
+         width: 225px;
+         min-width: 0px;
+     }
+
+     .flex-direction {
+         flex-direction: row;
+     }
+
+     .flex-desktop {
+         width: 50%;
+     }
+
+     .flex-desc {
+         flex: 4;
+     }
+ }

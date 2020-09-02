@@ -7,14 +7,14 @@ import bookmarks from './scripts/bookmarks';
  
  
 const main = function () {
- console.log('MAIN -THISSSS WORKS!');
+ //console.log('MAIN -THISSSS WORKS!');
  api.getBookmarks()
  .then((bookmarksArr) => {
    bookmarksArr.forEach((bookmark) => store.addBookmark(bookmark));
-   bookmarks.renderPage();
+   bookmarks.render();
  });
  bookmarks.bindEventListeners();
- bookmarks.renderPage();
+ bookmarks.render();
 };
  
 $(main);
