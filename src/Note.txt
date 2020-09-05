@@ -1,0 +1,8 @@
+Did the student submit their repository URL?
+--yes, see submission
+Did the student add the live Github Pages link in the 'about' area at the top of their repository?
+--yes, see 'about' area on repo page
+Did the student create a README.md file that includes a link to the live app, a brief overview, and a list of all user stories completed?
+--yes, see README.md file on repo page
+Did the student implement each of the user stories listed in their README file?
+--yes, commented throughout the code where each user story was met

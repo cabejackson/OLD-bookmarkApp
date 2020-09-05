@@ -5,6 +5,15 @@ import api from './api';
 //This bookmark.js file holds all the event listeners for the app
 //and the html that's being rendered in the page
 
+//User story Requirement met upon initially loading page:
+// "I can see a list of my bookmarks when I first open the app"
+// should be able to see the bookmarks I added as tests
+
+
+//generateMainPageLayout meets the following user story:
+// "I can select from a dropdown (a <select> element) a "minimum rating" 
+// to filter the list by all bookmarks rated at or above the chosen selection"
+// the handleRatingFilter event handler actually controls the filtering of the bookmarks
 const generateMainPageLayout = () => {
     return `
     <section class="container">
@@ -28,8 +37,11 @@ const generateMainPageLayout = () => {
     </section>
     `;
 };
+//generateForm meets the following user stories:
+// "I can add bookmarks to my bookmark list. Bookmarks contain: title, url link, description, rating (1-5)"
+// "I receive appropriate feedback when I cannot submit a bookmark"
 
-// generateForm is the form page with a place to input: Title, URL, rating and description 
+//generateForm is the form page with a place to input: Title, URL, rating and description 
 const generateForm = () => {
     //form includes labels - a11y requirements
     //and the "for" attr matches the "id" - a11y requirements
@@ -93,6 +105,8 @@ const generateForm = () => {
 
 
 // generateBookmarkElement & generateExpandedBookmarkElement adds html elements to the DOM, which are rendered by renderPage
+//  generateBookmarkElement meets the following user story:
+//  "All bookmarks in the list default to a "condensed" view showing only title and rating"
 const generateBookmarkElement = (bookmark, hearts) => {
     return `
       <li class="js-bookmark-item shadow" data-item-id="${bookmark.id}">
@@ -108,6 +122,13 @@ const generateBookmarkElement = (bookmark, hearts) => {
       </li>
     `;
   };
+//  generateExpandedBookmarkElement meets the following user stories:
+//  "I can click on a bookmark to display the "detailed" view"
+// "Detailed view expands to additionally display description and a "Visit Site" link"
+    //NOTE: 
+      // the clicking -- is controlled by the event handler (handleClickToExpandBookmark),
+      // which actually triggers the expanding action
+      // also the link actually opens to the correct website
 const generateExpandedBookmarkElement = (bookmark) => {
     return `
     <li class="js-bookmark-item" data-item-id="${bookmark.id}">
@@ -212,7 +233,7 @@ const getItemIdFromElement = function (item) {
       .data('item-id');
 };
 
-//   ------------------event handlers -------------- //
+// -----------------------event handlers -------------- //
 
 //still working on this
   const renderError = () => {
@@ -223,7 +244,7 @@ const getItemIdFromElement = function (item) {
       $('.error-container').empty();
     }
   };
-//still working on this
+//still working on this, but it's functioning now
   const handleCloseError = () => {
     $('.error-container').on('click', '#cancel-error', () => {
       store.setError(null);
@@ -258,6 +279,9 @@ const handleSubmitNewBookmark = () => {
     });
 };
 
+// generateExpandedBookmarkElement meets the following user story:
+  // "I can click on a bookmark to display the "detailed" view"
+  // AND this event handler (handleClickToExpandBookmark) actually triggers the expanding action
 const handleClickToExpandBookmark = () => {
     $('main').on('click', '.top-half', event => {
       const bookmarkId = getItemIdFromElement(event.currentTarget);
@@ -268,7 +292,9 @@ const handleClickToExpandBookmark = () => {
     });
   };  
 
-  
+
+// handleDeleteBookmark meets the following user story:  
+//  "I can remove bookmarks from my bookmark list"
 const handleDeleteBookmark = () => {
     $('main').on('click', '.js-bookmark-delete', event => {
       const bookmarkId = getItemIdFromElement(event.currentTarget);
@@ -284,6 +310,10 @@ const handleDeleteBookmark = () => {
     });
 };
   
+//handleRatingFilter meets the following user story:
+// "I can select from a dropdown (a <select> element) a "minimum rating" 
+// to filter the list by all bookmarks rated at or above the chosen selection"
+// Note: the generateMainPageLayout is where the HTML for filter ratings is located
   const handleRatingFilter = () => {
     $('main').on('change', '.js-filter-rating', event => {
       store.rating = $(event.target).val();
@@ -291,6 +321,10 @@ const handleDeleteBookmark = () => {
     });
   };
   
+//Extension feature - still working on this one! 
+//Description is editable, but the edits aren't saving correctly just yet!
+//handleBookmarkSaveClick meets the following user story:
+//I can edit the rating and description of a bookmark in my list
 const handleBookmarkSaveClick = () => {
     $('main').on('click', '.js-bookmark-save', event => {
       const bookmarkId = getItemIdFromElement(event.currentTarget);
